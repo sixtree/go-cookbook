@@ -59,9 +59,9 @@ end
     owner 'root'
     group 'root'
     variables(:go_agent_instance => suffix)
-    subscribes :create, "rpm_package[go-agent]"
+    #subscribes :create, "rpm_package[go-agent]"
     notifies :enable, "service[go-agent#{suffix}]", :delayed
-    action :nothing
+    #action :nothing
   end
 
   template "/etc/default/go-agent#{suffix}" do
