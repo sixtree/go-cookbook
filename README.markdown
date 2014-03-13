@@ -1,8 +1,9 @@
-# Go Cookbook
+# Go Cookbook (Enterprise Linux version)
 
 Hello friend! This cookbook is here to help you setup Go servers and agents
-in an automated way. Currently, this repo is blank, but every project starts
-from a humble beginning, does it not?
+in an automated way.
+
+This fork of the cookbook supports installation on RedHat-like distros (CentOS, Amazon Linux etc).
 
 ## Ideas
 
@@ -24,3 +25,4 @@ go::default will install both on the same node.
 # Authors
 Author:: Chris Kozak (<ckozak@gmail.com>)
 Author:: Tim Brown (<tpbrown@gmail.com>)
+Author:: Robert Valk (<robert.valk@sixtree.com.au>)

@@ -1,17 +1,18 @@
-include_recipe 'apt'
-include_recipe 'java'
-
 package 'unzip'
 
-apt_repository "thoughtworks" do
-  uri "http://download01.thoughtworks.com/go/debian"
-  components ["contrib/"]
+package_url             = node[:go][:server][:package_url]
+package_checksum        = node[:go][:server][:package_checksum]
+package_local_path      = "#{Chef::Config[:file_cache_path]}/go-server-#{node[:go][:version]}.noarch.rpm"
+
+
+remote_file package_local_path do
+  source   package_url
+  checksum package_checksum
 end
 
-package "go-server" do
+rpm_package "go-server" do
   version node[:go][:version]
-  options "--force-yes"
-  notifies :start, 'service[go-server]', :immediately
+  source  package_local_path
 end
 
 # If we're upgrading an existing Go Server then leave the configuration and such intact. 

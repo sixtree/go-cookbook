@@ -1,20 +1,19 @@
-include_recipe 'apt'
-include_recipe 'java'
-
-go_server               = node[:go][:agent][:server_host]
 package_url             = node[:go][:agent][:package_url]
 package_checksum        = node[:go][:agent][:package_checksum]
+package_local_path      = "#{Chef::Config[:file_cache_path]}/go-agent-#{node[:go][:version]}.noarch.rpm"
+
+go_server               = node[:go][:agent][:server_host]
 go_server_autoregister  = node[:go][:agent][:auto_register]
 autoregister_key        = node[:go][:agent][:auto_register_key]
 
-apt_repository "thoughtworks" do
-  uri "http://download01.thoughtworks.com/go/debian"
-  components ["contrib/"]
+remote_file package_local_path do
+  source   package_url
+  checksum package_checksum
 end
 
-package "go-agent" do
+rpm_package "go-agent" do
   version node[:go][:version]
-  options "--force-yes"
+  source  package_local_path
 end
   
 if Chef::Config[:solo] || node.attribute?('go') && node['go'].attribute?('server')
