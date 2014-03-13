@@ -14,3 +14,6 @@ default[:go][:agent][:auto_register]         = false
 default[:go][:agent][:auto_register_key]     = "default_auto_registration_key"
 # Install this many agent instances on a box - default is one per CPU
 default[:go][:agent][:instance_count]        = 2 # node[:cpu][:total]
+
+# This java home will only wok for RHEL-based distros.
+default[:java][:java_home]                   = "/usr/lib/jvm/java"
