@@ -59,7 +59,7 @@ end
     owner 'root'
     group 'root'
     variables(:go_agent_instance => suffix)
-    subscribes :create, "package[go-agent]"
+    subscribes :create, "rpm_package[go-agent]"
     notifies :enable, "service[go-agent#{suffix}]", :delayed
     action :nothing
   end
