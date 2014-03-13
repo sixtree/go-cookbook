@@ -74,8 +74,8 @@ end
       :go_agent_instance => suffix,
       :java_home => node[:java][:java_home],
       :work_dir => "/var/lib/go-agent#{suffix}")
-    subscribes :create, "template[/etc/init.d/go-agent#{suffix}]"
-    action :nothing
+    #subscribes :create, "template[/etc/init.d/go-agent#{suffix}]"
+    #action :nothing
   end
   
   template "/usr/share/go-agent/agent#{suffix}.sh" do
@@ -84,8 +84,8 @@ end
     owner 'go'
     group 'go'
     variables(:go_agent_instance => suffix)
-    subscribes :create, "template[/etc/init.d/go-agent#{suffix}]"
-    action :nothing
+    #subscribes :create, "template[/etc/init.d/go-agent#{suffix}]"
+    #action :nothing
   end
 
   log "Registering agent#{suffix} with autoregister key of " + autoregister_key
